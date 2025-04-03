@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 https://github.com/divya0702/poetry.git
+=======
+https://github.com/divya0702/project-application-template.git
+>>>>>>> 46982520916936dc0d42fbbe0bc8d3249ba9b86a
