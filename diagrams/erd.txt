@@ -1,0 +1,69 @@
+erDiagram
+    ISSUE ||--o{ LABEL : has
+    ISSUE ||--o{ EVENT : has
+    ISSUE {
+        string url
+        string repository_url
+        string labels_url
+        string comments_url
+        string events_url
+        string html_url
+        int id
+        string node_id
+        int number
+        string title
+        string state
+        boolean locked
+        string assignee
+        string[] assignees
+        string milestone
+        int comments
+        string created_at
+        string updated_at
+        string closed_at
+        string author_association
+        string sub_issues_summary
+        string active_lock_reason
+        string body
+    }
+    USER {
+        string login
+        int id
+        string node_id
+        string avatar_url
+        string url
+        string html_url
+        string followers_url
+        string following_url
+        string gists_url
+        string starred_url
+        string subscriptions_url
+        string organizations_url
+        string repos_url
+        string events_url
+        string received_events_url
+        string type
+        boolean site_admin
+    }
+    ISSUE ||--o| USER : assigned_to
+    LABEL {
+        int id
+        string node_id
+        string url
+        string name
+        string color
+        boolean default
+        string description
+    }
+    EVENT {
+        int id
+        string node_id
+        string url
+        string event
+        string commit_id
+        string commit_url
+        string created_at
+        string state_reason
+        string performed_via_github_app
+    }
+    EVENT ||--o| USER : triggered_by

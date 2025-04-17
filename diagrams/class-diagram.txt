@@ -1,0 +1,110 @@
+---
+title: TEAM 7 CLASS DIAGRAM - Custom Version
+config:
+  theme: neo-dark
+---
+classDiagram
+direction LR
+
+%% ENTITY CLASSES
+class Issue {
+    +int id
+    +string title
+    +string body
+    +string state
+    +boolean locked
+    +string[] assignees
+    +string milestone
+    +int comments
+    +string created_at
+    +string updated_at
+    +string closed_at
+    +string url
+    +string html_url
+    +string repository_url
+    +string labels_url
+    +string events_url
+    +string node_id
+    +string author_association
+    +string active_lock_reason
+    +string sub_issues_summary
+}
+
+class Label {
+    +int id
+    +string name
+    +string color
+    +boolean default
+    +string description
+    +string url
+    +string node_id
+}
+
+class Event {
+    +int id
+    +string type
+    +string commit_id
+    +string commit_url
+    +string created_at
+    +string url
+    +string state_reason
+    +string performed_via_github_app
+    +string node_id
+}
+
+class Reaction {
+    +int total_count
+    +summarize() string
+}
+
+class User {
+    +int id
+    +string login
+    +string type
+    +string url
+    +string html_url
+    +string avatar_url
+    +boolean site_admin
+}
+
+%% UTIL CLASSES
+class Config {
+    +string dataPath
+    +string githubToken
+    +string owner
+    +string repo
+    +load() void
+}
+
+class DataLoader {
+    +readFromFile(filePath: string) Issue[]
+}
+
+class FetchIssues {
+    +fromGitHub() Issue[]
+    +store(issues: Issue[], filePath: string)
+}
+
+class Analysis {
+    +statusReport(issues: Issue[])
+    +resolutionMetrics(issues: Issue[])
+    +contributorSummary(issues: Issue[])
+    +labelStats(issues: Issue[])
+}
+
+%% RELATIONS
+Issue "1" o-- "*" Label : tagged
+Issue "1" o-- "*" Event : logs
+Issue "1" o-- "1" Reaction : has_reaction
+Issue "1" --> "0..1" User : assigned_to
+Event --> User : triggered_by
+
+Config <|-- DataLoader : configures
+DataLoader ..> Issue : reads
+FetchIssues ..> Issue : retrieves
+Analysis ..> Issue : inspects
+
+%% NOTES
+note for Issue "Main entity representing a GitHub issue"
+note for Config "Handles external project settings"
+note for Analysis "Provides issue analytics and insights"
