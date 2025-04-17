@@ -1,5 +1,3 @@
-
-
 """
 Starting point of the application. This module is invoked from
 the command line to run the analyses.
@@ -7,51 +5,32 @@ the command line to run the analyses.
 
 import argparse
 
-import config
-from example_analysis import ExampleAnalysis
-
+# Import each feature script as a module
+import scripts.label_count as label_count
+import scripts.resolution_time as resolution_time
+import scripts.user_issues as user_issues
 
 def parse_args():
-    """
-    Parses the command line arguments that were provided along
-    with the python command. The --feature flag must be provided as
-    that determines what analysis to run. Optionally, you can pass in
-    a user and/or a label to run analysis focusing on specific issues.
-    
-    You can also add more command line arguments following the pattern
-    below.
-    """
     ap = argparse.ArgumentParser("run.py")
-    
-    # Required parameter specifying what analysis to run
     ap.add_argument('--feature', '-f', type=int, required=True,
-                    help='Which of the three features to run')
-    
-    # Optional parameter for analyses focusing on a specific user (i.e., contributor)
-    ap.add_argument('--user', '-u', type=str, required=False,
-                    help='Optional parameter for analyses focusing on a specific user')
-    
-    # Optional parameter for analyses focusing on a specific label
-    ap.add_argument('--label', '-l', type=str, required=False,
-                    help='Optional parameter for analyses focusing on a specific label')
-    
+                    help='Which of the three features to run: 1 (label count), 2 (resolution time), 3 (user participation)')
     return ap.parse_args()
 
+def main():
+    args = parse_args()
 
+    if args.feature == 1:
+        print("Running Feature 1: Label Count Analysis")
+        label_count.run()
+    elif args.feature == 2:
+        print("Running Feature 2: Resolution Time Analysis")
+        resolution_time.run()
+    elif args.feature == 3:
+        print("Running Feature 3: User Participation Analysis")
+        user_issues.run()
+    else:
+        print("Invalid feature selected. Choose 1, 2, or 3.")
 
-# Parse feature to call from command line arguments
-args = parse_args()
-# Add arguments to config so that they can be accessed in other parts of the application
-config.overwrite_from_args(args)
-    
-# Run the feature specified in the --feature flag
-if args.feature == 0:
-    ExampleAnalysis().run()
-elif args.feature == 1:
-    pass # TODO call first analysis
-elif args.feature == 2:
-    pass # TODO call second analysis
-elif args.feature == 3:
-    pass # TODO call third analysis
-else:
-    print('Need to specify which feature to run with --feature flag.')
+if __name__ == "__main__":
+    main()
+
