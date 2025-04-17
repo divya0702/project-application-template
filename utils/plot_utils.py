@@ -1,35 +1,38 @@
-# Import matplotlib for creating visualizations
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
 def bar_chart(labels, counts, xlabel, ylabel, title, color="skyblue"):
     """
-    Plots a bar chart using the provided labels and values.
-
-    Args:
-        labels (list): Categories or labels to display on the x-axis.
-        counts (list): Corresponding numerical values for each label on the y-axis.
-        xlabel (str): Label for the x-axis.
-        ylabel (str): Label for the y-axis.
-        title (str): Title of the chart.
-        color (str, optional): Color of the bars. Defaults to "skyblue".
+    Static matplotlib chart (non-GUI).
     """
-    # Set the figure size
     plt.figure(figsize=(10, 6))
-
-    # Create a bar chart with the specified color
     plt.bar(labels, counts, color=color)
-
-    # Set axis labels and chart title
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
-
-    # Rotate x-axis labels for better readability
     plt.xticks(rotation=45, ha="right")
-
-    # Adjust layout to prevent clipping of labels
     plt.tight_layout()
-
-    # Display the chart
     plt.show()
+
+
+def gui_bar_chart(tk_root, labels, counts, xlabel, ylabel, title, color="skyblue"):
+    """
+    Draws a matplotlib bar chart inside a Tkinter window.
+    Returns a tuple: (figure, axis, canvas)
+    """
+    fig, ax = plt.subplots(figsize=(9.5, 5.2))
+    canvas = FigureCanvasTkAgg(fig, master=tk_root)
+    canvas.get_tk_widget().pack(padx=20, pady=15)
+
+    pos = range(len(labels))
+    ax.bar(pos, counts, color=color)
+    ax.set_xticks(pos)
+    ax.set_xticklabels(labels, rotation=30, ha="right", fontsize=11)
+    ax.set_xlabel(xlabel, fontsize=13)
+    ax.set_ylabel(ylabel, fontsize=13)
+    ax.set_title(title, fontsize=15, weight="bold")
+    fig.tight_layout()
+    canvas.draw()
+
+    return fig, ax, canvas
