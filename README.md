@@ -90,20 +90,4 @@ This script uses GitHub's API to pull issues and saves them as `poetry.json`.
 
 ---
 
-### ✅ Testing
 
-Unit tests can be found in the `tests/` folder. To run tests:
-
-```bash
-pytest tests/
-```
-
----{
-    "ENPM611_PROJECT_DATA_PATH":"path/to/data/file.json"
-}
-
-### 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
