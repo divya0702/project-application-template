@@ -90,4 +90,55 @@ This script uses GitHub's API to pull issues and saves them as `poetry.json`.
 
 ---
 
+Perfect — here's how to cleanly incorporate the missing pieces (**`utils/`** and **`gui/flexible_bucket_gui.py`**) into your README right **after the “📤 Data Collection”** section:
+
+---
+
+### 📤 Data Collection
+
+To extract GitHub issues and store them as JSON:
+
+```bash
+python scripts/scraping_issues.py
+```
+
+This script uses GitHub's API to pull issues and saves them as `poetry.json`.
+
+---
+
+### 🧰 Utility Modules
+
+Located in: `utils/`
+
+| File              | Purpose                                              |
+|-------------------|------------------------------------------------------|
+| `data_loader.py`  | Loads issues from JSON using config file             |
+| `plot_utils.py`   | Reusable function to plot bar charts using Matplotlib|
+| `logging_utils.py`| Configures centralized logging                       |
+
+These utilities are used across all three feature scripts for consistency and modularity.
+
+---
+
+### 🖼️ GUI Module (Feature 2)
+
+Located in: `gui/flexible_bucket_gui.py`
+
+This script powers the **resolution time GUI** launched by:
+
+```bash
+python run.py --feature 2
+```
+
+**What it does:**
+- Opens a Tkinter-based window
+- Allows the user to define resolution time buckets
+- Displays a bar chart with issue counts in each bucket
+
+**Requirements:**
+- Python with `tkinter` and `matplotlib` installed
+- GUI support (use Python from python.org on macOS for best results)
+
+---
+
 
