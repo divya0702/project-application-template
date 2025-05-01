@@ -90,20 +90,37 @@ This script uses GitHub's API to pull issues and saves them as `poetry.json`.
 
 ---
 
-### ✅ Testing
+### 🧰 Utility Modules
 
-Unit tests can be found in the `tests/` folder. To run tests:
+Located in: `utils/`
+
+| File              | Purpose                                              |
+|-------------------|------------------------------------------------------|
+| `data_loader.py`  | Loads issues from JSON using config file             |
+| `plot_utils.py`   | Reusable function to plot bar charts using Matplotlib|
+| `logging_utils.py`| Configures centralized logging                       |
+
+These utilities are used across all three feature scripts for consistency and modularity.
+
+---
+
+### 🖼️ GUI Module (Feature 2)
+
+Located in: `gui/flexible_bucket_gui.py`
+
+This script powers the **resolution time GUI** launched by:
 
 ```bash
-pytest tests/
+python run.py --feature 2
 ```
 
----{
-    "ENPM611_PROJECT_DATA_PATH":"path/to/data/file.json"
-}
+**What it does:**
+- Opens a Tkinter-based window
+- Allows the user to define resolution time buckets
+- Displays a bar chart with issue counts in each bucket
 
-### 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+**Requirements:**
+- Python with `tkinter` and `matplotlib` installed
+- GUI support (use Python from python.org on macOS for best results)
 
 ---

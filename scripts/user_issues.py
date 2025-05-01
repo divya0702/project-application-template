@@ -1,12 +1,14 @@
 import sys
 import os
 from collections import defaultdict
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 from utils.json_utils import load_json
 from utils.plot_utils import bar_chart
 from utils.logging_utils import logger
+
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+script_dir = os.path.dirname(os.path.abspath(__file__))  # points to .../scripts/
+json_path = os.path.join(script_dir, "..", "data", "poetry.json")
+json_path = os.path.abspath(json_path)
 
 
 def run():
